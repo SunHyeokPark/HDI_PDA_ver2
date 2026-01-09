@@ -39,6 +39,26 @@ WebView.evaluateJavascript()
 scan_bar input filled
 ```
 
+## 🚀 빠른 시작
+
+### ⭐ 방법 1: GitHub 웹 업로드 (초간단 - 권장)
+
+복잡한 설정 없이 **5분**만에 Debug APK 받기!
+
+👉 **상세 가이드**: `SIMPLE_WEB_UPLOAD.md` 파일 참조
+
+**3단계**:
+1. GitHub 리포지토리 생성
+2. 모든 파일을 웹에서 드래그 앤 드롭
+3. Actions에서 APK 다운로드
+
+**필요**: GitHub 계정만  
+**불필요**: Git, Android Studio, Keystore, 복잡한 설정
+
+---
+
+### 💻 방법 2: 로컬 빌드 (개발자용)
+
 ## 🚀 빌드 및 설치
 
 ### 1. 사전 요구사항
