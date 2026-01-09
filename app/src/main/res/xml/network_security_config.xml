@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- 기본적으로 HTTP 차단 -->
+    <base-config cleartextTrafficPermitted="false" />
+    
+    <!-- 특정 도메인만 HTTP 허용 -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">erp.hdi21.co.kr</domain>
+        <domain includeSubdomains="false">localhost</domain>
+        <domain includeSubdomains="false">127.0.0.1</domain>
+        <domain includeSubdomains="false">10.0.2.2</domain> <!-- Android Emulator -->
+    </domain-config>
+</network-security-config>

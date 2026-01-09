@@ -1,0 +1,108 @@
+<!-- 
+ASP 파일 수정 가이드: barcode_scan_camera_ver.asp
+네이티브 Android 앱과의 통합을 위한 JavaScript 수정
+-->
+
+<!-- 
+수정 위치 1: openImageScanner 함수 수정
+기존 함수를 다음과 같이 교체하세요
+-->
+
+<script type="text/javascript">
+// 이미지 스캐너 열기 (네이티브 앱 통합)
+function openImageScanner() {
+    // 1. 네이티브 앱 체크
+    if (window.Native && typeof window.Native.openScanner === 'function') {
+        try {
+            console.log('Opening native scanner...');
+            // 네이티브 스캐너 호출
+            window.Native.openScanner();
+            return; // 네이티브 스캐너 사용 시 웹 스캐너는 열지 않음
+        } catch (e) {
+            console.error('Native scanner error:', e);
+            // 에러 발생 시 fallback
+        }
+    }
+    
+    // 2. Fallback: 기존 웹 스캐너
+    console.log('Opening web scanner (fallback)...');
+    $('#image-scanner').addClass('active');
+    resetScanner();
+}
+
+// 선택사항: 네이티브 앱 감지 및 UI 조정
+$(document).ready(function() {
+    // 기존 초기화 코드...
+    
+    // 네이티브 앱 체크
+    if (window.Native && typeof window.Native.isNativeApp === 'function') {
+        try {
+            if (window.Native.isNativeApp()) {
+                console.log('Running in native app');
+                
+                // 선택사항: 실시간 스캔 버튼 숨기기 (네이티브 앱에서는 불필요)
+                $('#live-scan-button').hide();
+                
+                // 선택사항: UI 텍스트 변경
+                $('#Capture_btn').attr('title', '네이티브 스캐너');
+            }
+        } catch (e) {
+            console.error('Native app check error:', e);
+        }
+    }
+});
+
+// 선택사항: 네이티브 앱 버전 정보 표시
+function showAppInfo() {
+    if (window.Native && typeof window.Native.getAppVersion === 'function') {
+        try {
+            var version = window.Native.getAppVersion();
+            console.log('App version:', version);
+            // 필요시 UI에 표시
+        } catch (e) {
+            console.error('Get app version error:', e);
+        }
+    }
+}
+</script>
+
+<!-- 
+수정 위치 2: Capture 버튼 (변경 불필요, 기존 onclick 그대로 유지)
+기존: <button type="button" class="btn btn-capture" onclick="openImageScanner();" id="Capture_btn">
+그대로 유지하세요. openImageScanner 함수 내부에서 네이티브/웹을 자동 선택합니다.
+-->
+
+<!-- 
+테스트 방법:
+1. 웹 브라우저에서 열기: 기존 웹 스캐너 동작 (window.Native가 undefined)
+2. 네이티브 앱에서 열기: 네이티브 스캐너 동작 (window.Native.openScanner 호출)
+3. 네이티브 스캐너 오류 시: 자동으로 웹 스캐너로 fallback
+-->
+
+<!-- 
+추가 디버깅 코드 (개발 중에만 사용):
+-->
+<script type="text/javascript">
+// 개발용: 네이티브 인터페이스 확인
+function checkNativeInterface() {
+    console.log('=== Native Interface Check ===');
+    console.log('window.Native exists:', typeof window.Native !== 'undefined');
+    
+    if (window.Native) {
+        console.log('Native.openScanner exists:', typeof window.Native.openScanner === 'function');
+        console.log('Native.isNativeApp exists:', typeof window.Native.isNativeApp === 'function');
+        console.log('Native.getAppVersion exists:', typeof window.Native.getAppVersion === 'function');
+        
+        if (typeof window.Native.isNativeApp === 'function') {
+            console.log('isNativeApp():', window.Native.isNativeApp());
+        }
+        if (typeof window.Native.getAppVersion === 'function') {
+            console.log('getAppVersion():', window.Native.getAppVersion());
+        }
+    }
+    console.log('==============================');
+}
+
+// 페이지 로드 후 자동 체크 (개발 중에만)
+// checkNativeInterface();
+</script>

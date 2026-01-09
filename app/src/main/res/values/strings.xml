@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HDI PDA</string>
+    <string name="scanner_title">바코드 스캔</string>
+    <string name="scan_instruction">바코드를 화면 중앙에 위치시키세요</string>
+    <string name="scan_success">✓ 스캔 완료!</string>
+    <string name="camera_permission_required">카메라 권한이 필요합니다</string>
+    <string name="camera_permission_denied">카메라 권한이 거부되었습니다</string>
+</resources>

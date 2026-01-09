@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<full-backup-content>
+    <!-- WebView 데이터 백업 제외 (보안) -->
+    <exclude domain="sharedpref" path="WebViewChromiumPrefs.xml"/>
+    <exclude domain="database" path="webview.db"/>
+    <exclude domain="database" path="webviewCache.db"/>
+</full-backup-content>
