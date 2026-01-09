@@ -24,11 +24,17 @@
 unzip HDI-PDA.zip
 cd HDI-PDA
 
+# (선택) Gradle Wrapper 생성 - Gradle이 설치된 경우만
+gradle wrapper --gradle-version 8.2
+# 또는 GitHub Actions가 자동으로 생성하므로 이 단계를 건너뛰어도 됩니다
+
 # Git 초기화
 git init
 git add .
 git commit -m "Initial commit: HDI PDA v1.0.0"
 ```
+
+**💡 팁**: Gradle Wrapper(gradlew, gradle-wrapper.jar)가 없어도 GitHub Actions가 자동으로 생성하므로 문제없습니다!
 
 ### 3단계: GitHub에 푸시
 
@@ -194,6 +200,24 @@ git push origin v1.0.0
 ```
 
 ## 🐛 문제 해결
+
+### "gradlew not found" 오류
+
+**증상**: `chmod: cannot access 'gradlew': No such file or directory`
+
+**해결**:
+GitHub Actions가 자동으로 Gradle Wrapper를 생성하도록 이미 설정되어 있습니다.
+
+로컬에서 빌드하려면:
+```bash
+# 방법 1: Gradle로 wrapper 생성
+gradle wrapper --gradle-version 8.2
+./gradlew assembleDebug
+
+# 방법 2: Android Studio에서 프로젝트 열기
+# → File → Sync Project with Gradle Files
+# → Build → Build Bundle(s) / APK(s) → Build APK(s)
+```
 
 ### "build failed" 오류
 
