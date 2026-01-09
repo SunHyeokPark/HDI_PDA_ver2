@@ -44,9 +44,21 @@ scan_bar input filled
 ### 1. 사전 요구사항
 
 - JDK 17
-- Android Studio Hedgehog (2023.1.1) 이상
+- Android Studio Hedgehog (2023.1.1) 이상 **또는** Gradle 8.2+
 - Android SDK 34
-- Gradle 8.2+
+
+**중요**: Gradle Wrapper가 포함되지 않은 경우, 다음 중 하나를 실행하세요:
+
+```bash
+# Gradle이 설치된 경우
+gradle wrapper --gradle-version 8.2
+
+# 또는 Android Studio에서 프로젝트 열기
+# → Gradle이 자동으로 wrapper 생성
+
+# 또는 GitHub Actions에 push
+# → CI/CD가 자동으로 wrapper 생성 및 빌드
+```
 
 ### 2. Keystore 생성 (최초 1회)
 
